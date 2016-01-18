@@ -1,0 +1,21 @@
+<h1><?= $mensagem ?></h1>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Nome</th>			
+			<th>Preço</th>
+			<th>Descrição</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php foreach($produtos as $produto):  ?>
+			<tr>
+				<td><?= $produto->getNome() ?></td>
+				<td><?= $produto->getPreco() ?></td>
+				<td><?= $produto->getDescricao() ?></td>				
+			</tr>
+		<?php endforeach; ?>
+	</tbody>	
+</table>
