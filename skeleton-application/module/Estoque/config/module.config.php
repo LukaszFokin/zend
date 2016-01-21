@@ -39,7 +39,8 @@ return array(
 
 	'controllers' => array(
 		'invokables' => array(
-			'Estoque\Controller\Index' => 'Estoque\Controller\IndexController'
+			'Estoque\Controller\index' => 'Estoque\Controller\IndexController',
+			'Estoque\Controller\usuario' => 'Estoque\Controller\UsuarioController',
 		)
 	),
 	
@@ -77,5 +78,14 @@ return array(
                 ),
             ),
         ),
+
+     'authentication' => array (
+        	'orm_default' => array (
+        		'object_manager' => 'Doctrine\ORM\EntityManager',
+        		'identity_class' => 'Estoque\Entity\Usuario',
+        		'identity_property' => 'email',
+        		'credential_property' => 'senha'
+        	)
+        ), 
     ),
 );
