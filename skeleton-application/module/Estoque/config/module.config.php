@@ -17,6 +17,22 @@ return array(
 						'action' => 'index'
 					)
 				)
+			),
+
+			'produto' => array(
+				'type' => 'Segment',
+				'options' => array(
+					'route' => '/Produtos[/:page]',
+					'constraints' => array(
+						'page' => '[0-9]*'
+					),
+					'defaults' => array(
+						'__NAMESPACE__' => 'Estoque\Controller',
+						'controller' => 'Index',
+						'action' => 'index',
+						'page' => 1
+					)
+				)
 			)
 		)
 	),
@@ -42,7 +58,8 @@ return array(
 
 	'view_helpers' => array(
 		'invokables' => array(
-			'FlashHelper' => 'Estoque\Helper\FlashHelper'
+			'FlashHelper' => 'Estoque\Helper\View\FlashHelper',
+			'PaginationHelper' => 'Estoque\Helper\View\PaginationHelper'
 		),
 	),
 

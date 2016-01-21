@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Aplicação de Estoque - Zend 2 + Doctrine</title>
+	<?php 
+		echo $this->headLink()
+			->prependStylesheet($this->basePath('css/style-custom.css'))
+			->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+			->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'));
+
+		echo $this->headScript()
+			->prependFile($this->basePath('js/jquery.min.js'))
+			->prependFile($this->basePath('js/bootstrap.min.js'));
+	?>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-default">
+			<div class="navbar-head">
+				<a href="#" class="navbar-brand">Sabugão</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="<?= $this->url('application', ['action' => 'Index']);?>">Listagem dos produtos</a></li>
+				<li><a href="<?= $this->url('application', ['action' => 'create']);?>">Cadastro de Produtos</a></li>
+			</ul>
+		</nav>
+	</header>
+	
+	<main class="content">
+		<?php  
+			$this->flashHelper();
+			echo $this->content
+		?>		
+	</main>
+
+	<footer class="footer">Todos os direitos reservados ao sabugão</footer>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<h1>Contato</h1>
+
+<form method="post" action="<?= $this->url('application', ['action' => 'contact']) ?>">
+	<div class="form-group">
+		<label>Nome</label>
+		<input type="text" class="form-control" name="nome">
+	</div>
+
+	<div class="form-group">
+		<label>Email</label>
+		<input type="email" class="form-control" name="email">
+	</div>
+
+	<div class="form-group">
+		<label>Mensagem</label>
+		<textarea name="mensagem" class="form-control"></textarea>
+	</div>	
+
+	<div class="form-group">
+		<input type="submit" class="btn btn-primary" value="Enviar Email">
+	</div>
+</form>

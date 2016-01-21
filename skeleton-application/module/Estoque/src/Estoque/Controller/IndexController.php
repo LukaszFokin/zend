@@ -14,13 +14,23 @@ use Zend\Mime\Part as MimePart;
 class IndexController extends AbstractActionController {
 
 	public function indexAction() {
+		$pagina = $this->params()->fromRoute('page');
+		if(is_null($pagina))
+			$pagina = 1;
+
+		$qtdPorPagina = 3;
+		$offset = ($pagina - 1) * $qtdPorPagina;
+
 		$entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 		$repositorio = $entityManager->getRepository('Estoque\Entity\Produto');
-		$produtos = $repositorio->findAll();
+		$produtos = $repositorio->getProdutosPaginados($qtdPorPagina, $offset);
+		//$produtos = $repositorio->findAll();
 
 		$params = array(
-			'produtos' => $produtos
-		);		
+			'produtos' => $produtos,
+			'qtdPorPagina' => $qtdPorPagina
+		);
+
 		return new ViewModel($params);
 	}
 
@@ -78,9 +88,11 @@ class IndexController extends AbstractActionController {
 			$entityManager->persist($produto);
 			$entityManager->flush();
 
+			/*
 			$this->flashMessenger()->addMessage('Produto #'.$produto->getId(). ' alterado com sucesso.');
 			$this->flashMessenger()->addErrorMessage('Produto #'.$produto->getId(). ' alterado com sucesso.');
 			$this->flashMessenger()->addWarningMessage('Produto #'.$produto->getId(). ' alterado com sucesso.');
+			*/
 			$this->flashMessenger()->addSuccessMessage('Produto #'.$produto->getId(). ' alterado com sucesso.');
 
 			return $this->redirect()->toUrl('/Index/index');	

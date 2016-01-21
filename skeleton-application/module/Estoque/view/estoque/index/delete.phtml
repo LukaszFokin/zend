@@ -1,0 +1,9 @@
+<h1>Delete Produto</h1>
+<form method="post" action=<?= $this->url('application', ['action' => 'delete'])?>>
+	<p class="alert alert-danger">Deseja realmente remover esse produto?</p>
+	<div class="form-group">
+		<input type="hidden" value="<?=$id?>" name="id">
+		<input type="submit" value="Sim" class="btn btn-danger">
+		<a href="<?= $this->url('application', ['action' => 'index'])?>" class="btn btn-primary">Não</a>
+	</div>	
+</form>
