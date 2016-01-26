@@ -1,23 +1,30 @@
-<h1>Editar Produto</h1>
+<h1>Cadastro de Produtos</h1>
 
-<form method="post" action="<?= $this->url('application', ['action' => 'update'])?>">
+<?php echo $this->form()->openTag($form); ?>
 	<div class="form-group">
 		<label for="">Nome</label>
-		<input type="text" name="nome" class="form-control" value="<?=$produto->getNome()?>">
+		<?php 
+			echo $this->formInput($form->get('nome')->setAttribute('value', $produto->getNome()));
+			echo $this->formElementErrors()->render($form->get('nome'));
+		?>
 	</div>
 
 	<div class="form-group">
 		<label for="">Preço</label>
-		<input type="number" name="preco" class="form-control" value="<?=$produto->getPreco()?>">
+		<?php echo $this->formInput($form->get('preco')->setAttribute('value', $produto->getPreco())) ?>
+	</div>
+
+	<div class="form-group">
+		<label for="">Categoria</label>
+		<?php echo $this->formSelect($form->get('categoria')->setAttribute('value', $produto->getCategoria()->getId())) ?>
 	</div>
 
 	<div class="form-group">
 		<label for="">Descrição</label>
-		<textarea class="form-control" name="descricao"><?=$produto->getDescricao()?></textarea>
+		<?php echo $this->formTextarea($form->get('descricao')->setAttribute('value', $produto->getDescricao())) ?>
 	</div>
 
 	<div class="form-group">
-		<input type="hidden" value="<?=$produto->getId()?>" name="id">
 		<input type="submit" value="salvar" class="btn btn-primary">
 	</div>
-</form>
+<?php echo $this->form()->closeTag($form) ?>

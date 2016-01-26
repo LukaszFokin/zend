@@ -5,6 +5,7 @@ namespace Estoque\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Estoque\Entity\Produto;
+use Estoque\Entity\Categoria;
 use Zend\Mail\Message;
 use Zend\Mail\Transport\Smtp as SmtpTransport;
 use Zend\Mail\Transport\SmtpOptions;
@@ -40,10 +41,14 @@ class IndexController extends AbstractActionController {
 			return $this->redirect()->toUrl('/Usuario/index');
 		}
 
-		$form = new \Estoque\Form\ProdutoForm;
+		$entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+		$categoriaEntity = $entityManager->getRepository('Estoque\Entity\Categoria');
+		$form = new \Estoque\Form\ProdutoForm($entityManager);
 		
 		if($this->request->isPost()) {
+			$categoria = $categoriaEntity->find($this->request->getPost('categoria'));
 			$produto = new Produto();
+			$produto->setCategoria($categoria);
 
 			$form->setInputFilter($produto->getInputFilter());
 			$form->setData($this->request->getPost());
@@ -92,12 +97,18 @@ class IndexController extends AbstractActionController {
 
 		$entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 		$repositorio = $entityManager->getRepository('Estoque\Entity\Produto');
+		$categoriaRepositorio = $entityManager->getRepository('Estoque\Entity\Categoria');
+
+		$form = new \Estoque\Form\ProdutoForm($entityManager);
 		$produto = $repositorio->find($id);
 
 		if($this->request->isPost()) {
+			$categoria = $categoriaRepositorio->find($this->request->getPost('categoria'));
+
 			$produto->setNome($this->request->getPost('nome'));
 			$produto->setPreco($this->request->getPost('preco'));
 			$produto->setDescricao($this->request->getPost('descricao'));
+			$produto->setCategoria($categoria);
 
 			$entityManager->persist($produto);
 			$entityManager->flush();
@@ -112,7 +123,7 @@ class IndexController extends AbstractActionController {
 			return $this->redirect()->toUrl('/Index/index');	
 		}
 
-		return new ViewModel(['produto' => $produto]);
+		return new ViewModel(['produto' => $produto, 'form' => $form]);
 	}
 
 	public function contactAction() {

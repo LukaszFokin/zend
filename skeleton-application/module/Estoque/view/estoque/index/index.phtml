@@ -5,6 +5,7 @@
 		<tr>
 			<th>Nome</th>			
 			<th>Preço</th>
+			<th>Categoria</th>
 			<th>Descrição</th>
 			<th>Ações</th>
 		</tr>
@@ -15,6 +16,7 @@
 			<tr>
 				<td><?= $produto->getNome() ?></td>
 				<td><?= $produto->getPreco() ?></td>
+				<td><?= $produto->getCategoria()->getNome() ?></td>
 				<td><?= $produto->getDescricao() ?></td>				
 				<td>
 					<a href="<?= $this->url('application', ['action' => 'delete', 'id' => $produto->getId()]); ?>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a>
