@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0d286c33524b082c43603a70d943113b",
-    "content-hash": "575f0822208f5bd75ce63487b24e8937",
+    "hash": "5e3eb52d2f325dabc410d006e510eb5f",
+    "content-hash": "bada411ff30a63d4b890b60a29435d51",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2943,20 +2943,20 @@
         },
         {
             "name": "zendframework/zend-i18n-resources",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-i18n-resources.git",
-                "reference": "7313a7711d283ade0fccce162b49c6ee62b02763"
+                "reference": "fe53e1c96654c4fc89975d14ed13ccbce6c08179"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-i18n-resources/zipball/7313a7711d283ade0fccce162b49c6ee62b02763",
-                "reference": "7313a7711d283ade0fccce162b49c6ee62b02763",
+                "url": "https://api.github.com/repos/zendframework/zend-i18n-resources/zipball/fe53e1c96654c4fc89975d14ed13ccbce6c08179",
+                "reference": "fe53e1c96654c4fc89975d14ed13ccbce6c08179",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23"
+                "php": ">=5.5"
             },
             "type": "library",
             "autoload": {
@@ -2974,7 +2974,7 @@
                 "translations",
                 "zf2"
             ],
-            "time": "2015-05-07 14:52:27"
+            "time": "2015-07-22 17:21:40"
         },
         {
             "name": "zendframework/zend-inputfilter",

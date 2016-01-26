@@ -39,20 +39,29 @@ class IndexController extends AbstractActionController {
 		if(!$user = $this->identity()) {
 			return $this->redirect()->toUrl('/Usuario/index');
 		}
+
+		$form = new \Estoque\Form\ProdutoForm;
 		
 		if($this->request->isPost()) {
 			$produto = new Produto();
-			$produto->setNome($this->request->getPost('nome'));
-			$produto->setPreco($this->request->getPost('preco'));
-			$produto->setDescricao($this->request->getPost('descricao'));
 
-			$entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-			$entityManager->persist($produto);
-			$entityManager->flush();
+			$form->setInputFilter($produto->getInputFilter());
+			$form->setData($this->request->getPost());
 
-			return $this->redirect()->toUrl('/Index/index');
+			if($form->isValid()) {
+				$produto->setNome($this->request->getPost('nome'));
+				$produto->setPreco($this->request->getPost('preco'));
+				$produto->setDescricao($this->request->getPost('descricao'));
+
+				$entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+				$entityManager->persist($produto);
+				$entityManager->flush();
+
+				return $this->redirect()->toUrl('/Index/index');
+			}
 		}
-		return new ViewModel();
+		
+		return new ViewModel(['form' => $form]);
 	}
 
 	public function deleteAction() {
