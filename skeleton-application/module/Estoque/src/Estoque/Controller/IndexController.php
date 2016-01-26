@@ -35,6 +35,11 @@ class IndexController extends AbstractActionController {
 	}
 
 	public function createAction() {
+
+		if(!$user = $this->identity()) {
+			return $this->redirect()->toUrl('/Usuario/index');
+		}
+		
 		if($this->request->isPost()) {
 			$produto = new Produto();
 			$produto->setNome($this->request->getPost('nome'));

@@ -84,7 +84,10 @@ return array(
         		'object_manager' => 'Doctrine\ORM\EntityManager',
         		'identity_class' => 'Estoque\Entity\Usuario',
         		'identity_property' => 'email',
-        		'credential_property' => 'senha'
+        		'credential_property' => 'senha',
+        		'credentialCallable' => function ($user, $senha) {
+        			return $user->getSenha() == md5($senha);
+        		}
         	)
         ), 
     ),

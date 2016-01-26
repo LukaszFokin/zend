@@ -11,26 +11,31 @@ class UsuarioController extends AbstractActionController {
 		return new ViewModel();
 	}
 
-	public  function loginAction() {
-		
-		if($this->request->isPost()) {
-
-		$dados = $this->request->getPost();
-
+	public function logoutAction() {
 		$authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
-		$authAdapter = $authService->getAdapter();
-		$authAdapter->setIdentityValue($dados['email']);
-		$authAdapter->setCredentialValue($dados['senha']);
+		$authService->clearIdentity();
 
-		$authResult = $authService->authenticate();
-
-		if($authResult->isValid()) {
-			return $this->redirect()->toUrl('Index/create');
-		}
-
-		$this->flashMessenger()->addErrorMessage("Login ou senha inválido");
 		return $this->redirect()->toUrl('/Usuario/Index');
+	}
 
+	public  function loginAction() {
+		if($this->request->isPost()) {
+			$dados = $this->request->getPost();
+
+			$authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+			$authAdapter = $authService->getAdapter();
+			$authAdapter->setIdentityValue($dados['email']);
+			$authAdapter->setCredentialValue($dados['senha']);
+
+			$authResult = $authService->authenticate();
+
+			if($authResult->isValid()) {
+				return $this->redirect()->toUrl('/Index/create');
+			}
+
+			$this->flashMessenger()->addErrorMessage("Login ou senha inválido");
+
+			return $this->redirect()->toUrl('/Usuario/Index');
 		}
 
 		return new ViewModel();
